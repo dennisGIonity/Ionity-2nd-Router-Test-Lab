@@ -31,7 +31,7 @@ $homeNic = $cfg.household.laptop_nic; $lab = $cfg.lab.laptop_nic; $group = 'Ioni
 try {
   if ($Undo) {
     Write-Host "[lab-net] UNDO: automatic metrics back on, lab firewall rules removed"
-    foreach ($n in $homeNic, $lab) {
+    foreach ($n in @($homeNic, $lab) + @(Get-NetAdapter -ErrorAction SilentlyContinue | % Name)) {
       foreach ($af in 'IPv4','IPv6') { Set-NetIPInterface -InterfaceAlias $n -AddressFamily $af -AutomaticMetric Enabled -ErrorAction SilentlyContinue }
     }
     Get-NetFirewallRule -Group $group -ErrorAction SilentlyContinue | Remove-NetFirewallRule
@@ -51,6 +51,15 @@ try {
   }
   Set-DnsClient -InterfaceAlias $lab -RegisterThisConnectionsAddress $false
   Write-Host "[lab-net] metrics: $homeNic=$($cfg.metrics.household_nic) (internet)  $lab=$($cfg.metrics.lab_nic) (lab only)"
+
+  # Any OTHER adapter that has ever sat on the lab (e.g. a USB Ethernet dongle) keeps the lab
+  # router as its DNS server - demote it too, or Windows asks a router with no internet first.
+  $others = Get-DnsClientServerAddress -AddressFamily IPv4 |
+    ? { $_.InterfaceAlias -notin @($homeNic, $lab) -and ($_.ServerAddresses -contains $cfg.lab.router_ip) }
+  foreach ($o in $others) {
+    Set-NetIPInterface -InterfaceAlias $o.InterfaceAlias -AddressFamily IPv4 -AutomaticMetric Disabled -InterfaceMetric $cfg.metrics.lab_nic -ErrorAction SilentlyContinue
+    Write-Host "[lab-net] also demoted '$($o.InterfaceAlias)' (had lab DNS $($cfg.lab.router_ip)) -> metric $($cfg.metrics.lab_nic)"
+  }
 
   # 2. Lab network = Private (a Public profile silently blocks every board)
   $p = Get-NetConnectionProfile -InterfaceAlias $lab -ErrorAction SilentlyContinue

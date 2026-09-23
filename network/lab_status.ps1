@@ -27,7 +27,7 @@ Check 'laptop has pinned lab address' ($labIp -eq $cfg.lab.server_ip) "$($cfg.la
 Check 'lab router reachable' (Test-Connection $cfg.lab.router_ip -Count 1 -Quiet) $cfg.lab.router_ip
 $prof = (Get-NetConnectionProfile -InterfaceAlias $cfg.lab.laptop_nic).NetworkCategory
 Check 'lab network is Private' ("$prof" -eq 'Private') "$prof"
-Check 'lab firewall rules present' ((Get-NetFirewallRule -Group 'Ionity Lab' | Measure-Object).Count -ge 4) 'group Ionity Lab'
+Check 'lab firewall rules present' ((@(Get-NetFirewallRule -Group 'Ionity Lab' -ErrorAction SilentlyContinue)).Count -ge 4) 'group Ionity Lab (SETUP-LAB-NETWORK.cmd)'
 $mq = [bool](Get-NetTCPConnection -LocalPort $cfg.ports.mqtt -State Listen)
 Check 'lab MQTT broker listening' $mq ":$($cfg.ports.mqtt)"
 
