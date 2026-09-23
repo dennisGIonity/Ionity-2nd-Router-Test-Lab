@@ -41,7 +41,7 @@ try {
   }
 
   foreach ($n in $homeNic, $lab) {
-    if (-not (Get-NetAdapter -Name $n -ErrorAction SilentlyContinue)) { throw "network adapter '$n' not found (edit config\lab.json)" }
+    if (-not (Get-NetAdapter -Name $n -ErrorAction SilentlyContinue)) { throw "network adapter '$n' not found (edit lab.json)" }
   }
 
   # 1. Route + DNS preference: household WiFi always wins, the lab never carries internet
