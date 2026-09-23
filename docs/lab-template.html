@@ -1,0 +1,192 @@
+<title>Ionity Lab Template</title>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#070b12; --panel:#0e1522; --panel2:#121b2b; --line:rgba(148,178,220,.14);
+  --txt:#e8eef7; --muted:#8a9bb4; --accent:#28d3f5; --accent2:#7b61ff;
+  --home:#f2b94b; --lab:#28d3f5; --ok:#25d07a; --bad:#ff4d6d;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  color-scheme:light;
+  --bg:#f3f6fa; --panel:#ffffff; --panel2:#eef3f9; --line:rgba(30,50,80,.14);
+  --txt:#132033; --muted:#566579; --accent:#0a8fb0; --accent2:#5b43d6;
+  --home:#a86a00; --lab:#0a8fb0; --ok:#138a50; --bad:#c22848;
+}}
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f3f6fa; --panel:#ffffff; --panel2:#eef3f9; --line:rgba(30,50,80,.14);
+  --txt:#132033; --muted:#566579; --accent:#0a8fb0; --accent2:#5b43d6;
+  --home:#a86a00; --lab:#0a8fb0; --ok:#138a50; --bad:#c22848;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font:15px/1.6 "Segoe UI",system-ui,-apple-system,sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:28px 40px}
+header{display:flex;gap:14px;align-items:center;margin-bottom:22px}
+.mark{width:42px;height:42px;flex:0 0 42px;border-radius:12px;display:grid;place-items:center;font-size:22px;
+  color:#04121a;background:linear-gradient(135deg,#28d3f5,#7b61ff)}
+h1{margin:0;font-size:22px;letter-spacing:.12em;font-weight:650;text-wrap:balance}
+.sub{margin:2px 0 0;color:var(--muted);font-size:13px}
+h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 12px;color:var(--txt)}
+section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px}
+p{margin:0 0 10px;max-width:68ch}
+code{font-family:var(--mono);font-size:.9em;background:var(--panel2);padding:1px 6px;border-radius:5px;overflow-wrap:anywhere}
+.diagram{overflow-x:auto}
+.diagram svg{display:block;min-width:720px;width:100%;height:auto}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+.net{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--panel2)}
+.net h3{margin:0 0 8px;font-size:14px;display:flex;align-items:center;gap:8px}
+.net h3 i{width:10px;height:10px;border-radius:3px;display:inline-block}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:13.5px}
+dt{color:var(--muted)} dd{margin:0;font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}
+ul.rules{margin:0;padding-left:18px;display:grid;gap:6px}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:start;
+  padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2)}
+ol.steps li::before{content:counter(s);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+  font-size:12px;font-weight:700;color:#04121a;background:var(--accent)}
+.who{font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;white-space:nowrap;align-self:center}
+.who.you{color:var(--home);background:color-mix(in srgb,var(--home) 15%,transparent)}
+.who.cl{color:var(--lab);background:color-mix(in srgb,var(--lab) 15%,transparent)}
+pre{margin:0;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+  font-family:var(--mono);font-size:12.5px;line-height:1.7;overflow-x:auto}
+.okc{color:var(--ok)} .mut{color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
+footer a{color:var(--accent)}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="mark">◈</div>
+  <div>
+    <h1>IONITY LAB TEMPLATE</h1>
+    <p class="sub">Isolated IoT lab next to household internet · use for every hardware project · DOC-2026-09-IONITY-LAB</p>
+  </div>
+</header>
+
+<section>
+  <h2>Layout</h2>
+  <div class="diagram">
+  <svg viewBox="0 0 900 230" role="img" aria-label="Afrihost fibre to TP-Link household router, WiFi to laptop, Ethernet to H3C lab router, lab WiFi to boards">
+    <g font-family="Segoe UI, system-ui, sans-serif" font-size="13">
+      <rect x="10" y="80" width="110" height="60" rx="10" fill="var(--panel2)" stroke="var(--line)"/>
+      <text x="65" y="106" text-anchor="middle" fill="var(--txt)" font-weight="600">Afrihost</text>
+      <text x="65" y="124" text-anchor="middle" fill="var(--muted)" font-size="11.5">fibre</text>
+
+      <line x1="120" y1="110" x2="160" y2="110" stroke="var(--muted)" stroke-width="2"/>
+      <rect x="160" y="62" width="170" height="96" rx="12" fill="var(--panel2)" stroke="var(--home)" stroke-width="1.5"/>
+      <text x="245" y="88" text-anchor="middle" fill="var(--home)" font-weight="700" font-size="11" letter-spacing="1.5">HOUSEHOLD</text>
+      <text x="245" y="108" text-anchor="middle" fill="var(--txt)" font-weight="600">TP-Link EX511</text>
+      <text x="245" y="126" text-anchor="middle" fill="var(--muted)" font-size="11.5">192.168.0.1</text>
+      <text x="245" y="143" text-anchor="middle" fill="var(--muted)" font-size="11.5">owns 2.4 GHz · ch 1 · High</text>
+
+      <line x1="330" y1="110" x2="380" y2="110" stroke="var(--home)" stroke-width="2" stroke-dasharray="5 4"/>
+      <text x="355" y="100" text-anchor="middle" fill="var(--home)" font-size="11">WiFi</text>
+      <text x="355" y="128" text-anchor="middle" fill="var(--muted)" font-size="10.5">internet</text>
+
+      <rect x="380" y="52" width="170" height="116" rx="12" fill="var(--panel2)" stroke="var(--accent2)" stroke-width="1.5"/>
+      <text x="465" y="78" text-anchor="middle" fill="var(--accent2)" font-weight="700" font-size="11" letter-spacing="1.5">LAPTOP</text>
+      <text x="465" y="98" text-anchor="middle" fill="var(--txt)" font-weight="600">fleet server + MCP</text>
+      <text x="465" y="116" text-anchor="middle" fill="var(--muted)" font-size="11.5">:8099 · MQTT :1883</text>
+      <text x="465" y="133" text-anchor="middle" fill="var(--muted)" font-size="11.5">mDNS ionity-fleet.local</text>
+      <text x="465" y="150" text-anchor="middle" fill="var(--muted)" font-size="11.5">lab IP 192.168.124.4</text>
+
+      <line x1="550" y1="110" x2="600" y2="110" stroke="var(--lab)" stroke-width="3"/>
+      <text x="575" y="100" text-anchor="middle" fill="var(--lab)" font-size="11">cable</text>
+      <text x="575" y="128" text-anchor="middle" fill="var(--muted)" font-size="10.5">LAN port</text>
+
+      <rect x="600" y="62" width="170" height="96" rx="12" fill="var(--panel2)" stroke="var(--lab)" stroke-width="1.5"/>
+      <text x="685" y="88" text-anchor="middle" fill="var(--lab)" font-weight="700" font-size="11" letter-spacing="1.5">LAB · ISOLATED</text>
+      <text x="685" y="108" text-anchor="middle" fill="var(--txt)" font-weight="600">H3C Magic</text>
+      <text x="685" y="126" text-anchor="middle" fill="var(--muted)" font-size="11.5">192.168.124.1</text>
+      <text x="685" y="143" text-anchor="middle" fill="var(--muted)" font-size="11.5">5 GHz ch 149 + IoT 2.4 low</text>
+
+      <line x1="770" y1="110" x2="800" y2="110" stroke="var(--lab)" stroke-width="2" stroke-dasharray="5 4"/>
+      <rect x="800" y="40" width="90" height="36" rx="8" fill="var(--panel2)" stroke="var(--line)"/>
+      <text x="845" y="63" text-anchor="middle" fill="var(--txt)" font-size="12">ESP32 ×N</text>
+      <rect x="800" y="92" width="90" height="36" rx="8" fill="var(--panel2)" stroke="var(--line)"/>
+      <text x="845" y="115" text-anchor="middle" fill="var(--txt)" font-size="12">Pico W</text>
+      <rect x="800" y="144" width="90" height="36" rx="8" fill="var(--panel2)" stroke="var(--line)"/>
+      <text x="845" y="167" text-anchor="middle" fill="var(--txt)" font-size="12">Pi 5</text>
+      <line x1="800" y1="58" x2="790" y2="58" stroke="var(--lab)"/><line x1="790" y1="58" x2="790" y2="162" stroke="var(--lab)"/>
+      <line x1="790" y1="162" x2="800" y2="162" stroke="var(--lab)"/>
+
+      <text x="245" y="200" text-anchor="middle" fill="var(--home)" font-size="11.5">internet only — no lab traffic</text>
+      <text x="745" y="210" text-anchor="middle" fill="var(--lab)" font-size="11.5">all boards on 192.168.124.x</text>
+    </g>
+  </svg>
+  </div>
+</section>
+
+<section>
+  <h2>Addresses</h2>
+  <div class="two">
+    <div class="net">
+      <h3><i style="background:var(--home)"></i>Household</h3>
+      <dl>
+        <dt>Router</dt><dd>TP-Link EX511 · 192.168.0.1</dd>
+        <dt>Laptop NIC</dt><dd>WiFi · metric 10</dd>
+        <dt>Band</dt><dd>owns 2.4 GHz · ch 1 · 20 MHz · High</dd>
+        <dt>5 GHz</dt><dd>ch 36 (laptop, S10e)</dd>
+        <dt>Carries</dt><dd>internet + DNS only</dd>
+      </dl>
+    </div>
+    <div class="net">
+      <h3><i style="background:var(--lab)"></i>Lab</h3>
+      <dl>
+        <dt>Router</dt><dd>H3C Magic · 192.168.124.1</dd>
+        <dt>Laptop NIC</dt><dd>Ethernet · metric 200</dd>
+        <dt>Laptop IP</dt><dd>192.168.124.4 (reserved)</dd>
+        <dt>Main WiFi</dt><dd>IONITY-LAB · 5 GHz · ch 149</dd>
+        <dt>Board WiFi</dt><dd>IONITY-LAB-IOT · 2.4 GHz ch 11 · Low</dd>
+        <dt>Open ports</dt><dd>1883 · 8099 · 53/udp · 5353/udp → lab subnet only</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Rules</h2>
+  <ul class="rules">
+    <li>Nothing lab-related on the household network: no boards, no lab DNS, no GateFlame.</li>
+    <li>The laptop cable goes into an H3C <strong>LAN</strong> port. Never the WAN port.</li>
+    <li>Band split: the <strong>household owns 2.4 GHz</strong> (TP-Link), the <strong>lab lives on 5 GHz</strong> (<code>IONITY-LAB</code>, ch 149).</li>
+    <li>Exception: ESP32-S3 and Pico 2 W radios are <strong>2.4 GHz only</strong>. They get one low-power lab network, <code>IONITY-LAB-IOT</code> on ch 11, which never overlaps the household's ch 1. Dual-band ESP32-C5 boards join the 5 GHz network.</li>
+    <li>WiFi passwords are typed into <code>SET-LAB-WIFI.cmd</code> only, never in chat or commits.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Set up a lab</h2>
+  <ol class="steps">
+    <li><span>Laptop cable → an H3C LAN port.</span><span class="who you">you</span></li>
+    <li><span>H3C admin <code>http://192.168.124.1</code>: 5 GHz SSID <code>IONITY-LAB</code> ch 149. 2.4 GHz SSID <code>IONITY-LAB-IOT</code> ch 11, 20 MHz, low power, with band steering off so the two stay separate. Reserve <code>192.168.124.4</code> for MAC <code>40:C2:BA:F5:B9:5F</code>.</span><span class="who you">you</span></li>
+    <li><span>TP-Link <code>http://192.168.0.1</code>: 2.4 GHz ch 1, 20 MHz, power High. 5 GHz ch 36.</span><span class="who you">you</span></li>
+    <li><span>Double-click <code>SETUP-LAB-NETWORK.cmd</code> and approve the admin prompt.</span><span class="who you">you</span></li>
+    <li><span>Double-click <code>SET-LAB-WIFI.cmd</code>, accept <code>IONITY-LAB-IOT</code> and type its password (hidden).</span><span class="who you">you</span></li>
+    <li><span>Start the lab: <code>START-LAB.cmd</code> (the first run on a new PC also needs <code>lab.ps1 setup</code>).</span><span class="who cl">Claude</span></li>
+    <li><span>Flash each board with its project's flasher (ESP32-MCP: <code>scripts\add_device.ps1 -Port COMx</code>).</span><span class="who cl">Claude</span></li>
+    <li><span>Health check, every line OK: <code>LAB-STATUS.cmd</code></span><span class="who cl">Claude</span></li>
+  </ol>
+</section>
+
+<section>
+  <h2>A green lab looks like this</h2>
+  <pre><span class="okc">[OK]</span> internet goes via household NIC   WiFi -&gt; 192.168.0.1
+<span class="okc">[OK]</span> laptop has pinned lab address     Ethernet = 192.168.124.4
+<span class="okc">[OK]</span> lab network is Private            Private
+<span class="okc">[OK]</span> mDNS advertises lab address       ionity-fleet.local -&gt; 192.168.124.4
+<span class="okc">[OK]</span> DNS logger on lab only            bind 192.168.124.4:53
+<span class="okc">[OK]</span> esp32-98a316e5d18c                online, 192.168.124.x, fw 1.1.0
+<span class="mut">Undo laptop changes: network\setup_lab_network.ps1 -Undo</span></pre>
+</section>
+
+<section>
+  <h2>Add a project to the lab</h2>
+  <p>The lab is its own project, <strong>Ionity-Lab</strong> (<code>E:\.IONITY-LAB</code>). A new hardware project doesn't copy it; it registers in <code>lab.json</code> → <code>projects</code> with its path, firmware folder, env keys, start script and health URL. <code>SET-LAB-WIFI.cmd</code>, <code>START-LAB.cmd</code> and <code>LAB-STATUS.cmd</code> then cover it automatically. Run the health check before every client demo.</p>
+  <p class="mut" style="margin:0">Source: <code>github.com/dennisGIonity/Ionity-Lab</code> (private) · registered: ESP32-MCP</p>
+</section>
+
+<footer>AEDI · Ionity (Pty) Ltd · Policy 986 AED · © 2018-2026 Antwerp Designs · <a href="https://www.ionity.today">ionity.today</a> · Building Tomorrow, Today.</footer>
+</div>

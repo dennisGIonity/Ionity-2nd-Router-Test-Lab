@@ -1,0 +1,19 @@
+# --- secrets: never in this repo -----------------------------------------
+.env
+**/secrets.h
+*.key
+*.pem
+
+# --- runtime --------------------------------------------------------------
+.venv/
+__pycache__/
+*.py[cod]
+data/
+*.log
+
+# --- editors / os ---------------------------------------------------------
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
