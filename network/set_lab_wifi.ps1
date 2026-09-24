@@ -45,6 +45,7 @@ function Set-Define([string]$file, [string]$name, [string]$value) {
 
 foreach ($p in $projects) {
   Write-Host "`n== $($p.name)  ($($p.path))"
+  if (-not $p.firmware_dir) { Write-Host "[lab-wifi] no firmware (e.g. GateFlame runs on the Pi) - skipped"; continue }
   $fw = Join-Path $p.path $p.firmware_dir
 
   # 1. secrets.h in every sketch (git-ignored in the project)
