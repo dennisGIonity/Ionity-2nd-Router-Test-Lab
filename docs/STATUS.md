@@ -1,6 +1,6 @@
 # Lab status log
 
-Doc ID: DOC-2026-09-IONITY-LAB-STATUS Â· Policy 986 AED Â· Â© 2018-2026 Antwerp Designs | Ionity (Pty) Ltd
+Doc ID: DOC-2026-09-IONITY-LAB-STATUS · Policy 986 AED · © 2018-2026 Antwerp Designs | Ionity (Pty) Ltd
 
 ## 2026-10-03: lab ON, ESP32-MCP synced
 
@@ -25,7 +25,7 @@ Stopped by hand:
 Nothing is listening on 1883, 8099 or 53. The boards keep running on their own power and retry until the lab is back.
 
 **Will start again automatically when:**
-- you log in (Startup shortcut **Ionity Lab** â†’ `E:\.ESP32-MCP\scripts\start_lab.ps1`)
+- you log in (Startup shortcut **Ionity Lab** → `E:\.ESP32-MCP\scripts\start_lab.ps1`)
 - Claude calls an `ionity-esp32-fleet` MCP tool (the MCP bridge autostarts the lab)
 
 **Start by hand:** `E:\.IONITY-LAB\START-LAB.cmd`. **Check:** `LAB-STATUS.cmd`.
