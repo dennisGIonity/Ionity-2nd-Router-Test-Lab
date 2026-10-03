@@ -38,3 +38,8 @@ Nothing is listening on 1883, 8099 or 53. The boards keep running on their own p
 | ESP32-MCP | Firmware: ESP32 1.2.0 (DNS probe), Pico 1.1.0 (serial CMD/RES). The server runs under `python.exe`, because `pythonw` crashed uvicorn logging |
 | Still yours to do | `SETUP-LAB-NETWORK.cmd` (fixes laptop DNS while the lab cable is in); TP-Link 2.4 GHz ch 1 / 20 MHz; H3C `IONITY-LAB` 5 GHz ch 149 + `IONITY-LAB-IOT` 2.4 GHz ch 11 low power; reserve 192.168.124.4; `SET-LAB-WIFI.cmd` |
 | Then Claude | Reflash the boards onto `IONITY-LAB-IOT`, then `LAB-STATUS.cmd` until every line is OK |
+
+## 2026-10-03 (later): ESP32-MCP A-to-Z pass, lab.ps1 hardened
+
+- ESP32-MCP at `fce40e3` (host 2.1.3 / MCP 2.0.2, 18 tools). Report: `Esp32-MCP/docs/TEST-REPORT-2026-10-03.md`.
+- `lab.ps1`: `Listening()` is a real TCP connect (the old `Get-NetTCPConnection` check missed the amqtt socket and started duplicate brokers - two extra pairs were found and stopped); broker launches via WMI `Start-Detached` so wrappers capturing output no longer hang; broker stdout now also lands in `data\broker_out.txt`.

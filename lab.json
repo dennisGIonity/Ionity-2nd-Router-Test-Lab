@@ -49,7 +49,7 @@
       "env_file": ".env",
       "env": { "IONITY_MDNS_ADVERTISE_IP": "{server_ip}", "IONITY_DNS_BIND": "{server_ip}" },
       "start": "scripts\\start_lab.ps1",
-      "version": "host 2.1.2 / MCP server 2.0.1 / fw 2.1.1 (2026-10-03, commit 6a26149)",
+      "version": "host 2.1.3 / MCP server 2.0.2 / fw 2.1.1 (2026-10-03, commit fce40e3)",
       "testers_package": "scripts\\build_testers_package.ps1 -> dist\\Ionity-ESP32-MCP-Testers-v<ver>.zip",
       "health_url": "http://127.0.0.1:8099/api/v1/health",
       "devices_url": "http://127.0.0.1:8099/api/v1/devices?limit=500"

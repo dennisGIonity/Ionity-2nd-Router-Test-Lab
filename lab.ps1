@@ -20,7 +20,24 @@ $port = [int]($cfg.broker.bind -split ':')[-1]
 New-Item -ItemType Directory -Force (Join-Path $root 'data') | Out-Null
 
 function Say($m) { if (-not $Quiet) { Write-Host "[ionity-lab] $m" } }
-function Listening($p) { [bool](Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue) }
+function Start-Detached($exe, $argLine, $outFile, $errFile, $cwd) {
+  # No inherited handles: Start-Process lets children inherit this shell's stdout
+  # pipe, so any wrapper capturing our output blocks until the service exits.
+  $cl = "cmd.exe /d /c `"`"$exe`" $argLine > `"$outFile`" 2> `"$errFile`"`""
+  $si = New-CimInstance -ClassName Win32_ProcessStartup -ClientOnly -Property @{ ShowWindow = [uint16]0 }
+  $r  = Invoke-CimMethod -ClassName Win32_Process -MethodName Create `
+          -Arguments @{ CommandLine = $cl; CurrentDirectory = $cwd; ProcessStartupInformation = $si }
+  if ($r.ReturnValue -ne 0) { throw "could not start $exe (Win32_Process.Create rc=$($r.ReturnValue))" }
+  return $r.ProcessId
+}
+function Listening($p) {
+  # Real connect test: Get-NetTCPConnection -State Listen misses some Python sockets
+  # on Windows (empty State), which started duplicate brokers/servers.
+  $c = New-Object Net.Sockets.TcpClient
+  try { $ar = $c.BeginConnect('127.0.0.1', [int]$p, $null, $null)
+        if ($ar.AsyncWaitHandle.WaitOne(400) -and $c.Connected) { return $true } ; return $false }
+  catch { return $false } finally { $c.Dispose() }
+}
 function BrokerProcs {
   @(Get-CimInstance Win32_Process -Filter "Name like 'python%'" -ErrorAction SilentlyContinue |
     Where-Object { $_.CommandLine -like '*run_broker.py*' })
@@ -40,8 +57,7 @@ function Broker {
   if (Listening $port) { Say "broker        already up on :$port"; return }
   if (-not (Test-Path $py)) { Setup }
   Say "broker        starting on $($cfg.broker.bind)"
-  Start-Process -FilePath $py -ArgumentList "`"$root\broker\run_broker.py`" $($cfg.broker.bind)" `
-    -WorkingDirectory $root -RedirectStandardError "$root\data\broker_err.txt" -WindowStyle Hidden
+  Start-Detached $py "`"$root\broker\run_broker.py`" $($cfg.broker.bind)" "$root\data\broker_out.txt" "$root\data\broker_err.txt" $root | Out-Null
   for ($i = 0; $i -lt 15 -and -not (Listening $port); $i++) { Start-Sleep 1 }
   if (Listening $port) { Say "broker        up on :$port" } else { Say "broker FAILED - see data\broker_err.txt" }
 }
