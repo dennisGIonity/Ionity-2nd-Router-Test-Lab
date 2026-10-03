@@ -7,7 +7,7 @@ Doc ID: DOC-2026-09-IONITY-LAB-STATUS · Policy 986 AED · © 2018-2026 Antwerp 
 - H3C factory reset; SSIDs are now `Ionity-LAB_2.4G` (boards) and `Ionity-LAB_5G` - recorded in `lab.json`.
 - Laptop lab IP 192.168.124.2; boards `esp32-98a316e5d18c` (.4, fw 2.1.0) and `esp32-fc012cd8ea14` (.5, fw 2.1.1)
   online; Pico offline. Broker :1883 and fleet server :8099 up.
-- ESP32-MCP at commit `7e91028` (host 2.1.2 / MCP 1.3.0): live command replies on the dashboard and a standalone
+- ESP32-MCP at commit `7e91028` (host 2.1.2 / MCP server 2.0.1): live command replies on the dashboard and a standalone
   testers package (`scripts\build_testers_package.ps1`). `lab.json` project entry updated.
 - To do: `server_ip` in `lab.json` (and ESP32-MCP `.env` `IONITY_MDNS_ADVERTISE_IP`) still say .124.4, which is now a
   board's address - set both to .124.2 at the next lab restart.
