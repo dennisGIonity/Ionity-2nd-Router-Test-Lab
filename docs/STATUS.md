@@ -1,4 +1,4 @@
-﻿# Lab status log
+# Lab status log
 
 Doc ID: DOC-2026-09-IONITY-LAB-STATUS Â· Policy 986 AED Â· Â© 2018-2026 Antwerp Designs | Ionity (Pty) Ltd
 
