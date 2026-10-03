@@ -1,13 +1,13 @@
-# Lab status log
+﻿# Lab status log
 
-Doc ID: DOC-2026-09-IONITY-LAB-STATUS · Policy 986 AED · © 2018-2026 Antwerp Designs | Ionity (Pty) Ltd
+Doc ID: DOC-2026-09-IONITY-LAB-STATUS Â· Policy 986 AED Â· Â© 2018-2026 Antwerp Designs | Ionity (Pty) Ltd
 
 ## 2026-10-03: lab ON, ESP32-MCP synced
 
 - H3C factory reset; SSIDs are now `Ionity-LAB_2.4G` (boards) and `Ionity-LAB_5G` - recorded in `lab.json`.
 - Laptop lab IP 192.168.124.2; boards `esp32-98a316e5d18c` (.4, fw 2.1.0) and `esp32-fc012cd8ea14` (.5, fw 2.1.1)
   online; Pico offline. Broker :1883 and fleet server :8099 up.
-- ESP32-MCP at commit `7e91028` (host 2.1.2 / MCP server 2.0.1): live command replies on the dashboard and a standalone
+- ESP32-MCP at commit `6a26149` (host 2.1.2 / MCP server 2.0.1): live command replies on the dashboard and a standalone
   testers package (`scripts\build_testers_package.ps1`). `lab.json` project entry updated.
 - To do: `server_ip` in `lab.json` (and ESP32-MCP `.env` `IONITY_MDNS_ADVERTISE_IP`) still say .124.4, which is now a
   board's address - set both to .124.2 at the next lab restart.
@@ -25,7 +25,7 @@ Stopped by hand:
 Nothing is listening on 1883, 8099 or 53. The boards keep running on their own power and retry until the lab is back.
 
 **Will start again automatically when:**
-- you log in (Startup shortcut **Ionity Lab** → `E:\.ESP32-MCP\scripts\start_lab.ps1`)
+- you log in (Startup shortcut **Ionity Lab** â†’ `E:\.ESP32-MCP\scripts\start_lab.ps1`)
 - Claude calls an `ionity-esp32-fleet` MCP tool (the MCP bridge autostarts the lab)
 
 **Start by hand:** `E:\.IONITY-LAB\START-LAB.cmd`. **Check:** `LAB-STATUS.cmd`.
