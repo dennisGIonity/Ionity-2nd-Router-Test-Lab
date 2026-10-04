@@ -25,10 +25,10 @@ Stopped by hand:
 Nothing is listening on 1883, 8099 or 53. The boards keep running on their own power and retry until the lab is back.
 
 **Will start again automatically when:**
-- you log in (Startup shortcut **Ionity Lab** → `E:\.ESP32-MCP\scripts\start_lab.ps1`)
+- you log in (Startup shortcut **Ionity Lab** → `E:\.claude\Ionity\.ESP32-MCP\scripts\start_lab.ps1`)
 - Claude calls an `ionity-esp32-fleet` MCP tool (the MCP bridge autostarts the lab)
 
-**Start by hand:** `E:\.IONITY-LAB\START-LAB.cmd`. **Check:** `LAB-STATUS.cmd`.
+**Start by hand:** `E:\.claude\Ionity\.IONITY-LAB\START-LAB.cmd`. **Check:** `LAB-STATUS.cmd`.
 
 ### Where things stand
 | Area | State |

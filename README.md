@@ -76,7 +76,7 @@ Add an entry to `lab.json` → `projects`:
 ```
 - The project's firmware must read `WIFI_SSID` / `WIFI_PASSWORD` from a git-ignored `secrets.h`.
 - It must use MQTT at the lab broker (`192.168.124.4:1883`, or `127.0.0.1:1883` on the laptop).
-- Its start script must accept `-Restart` and `-Quiet`, and call `E:\.IONITY-LAB\lab.ps1 broker` first.
+- Its start script must accept `-Restart` and `-Quiet`, and call `E:\.claude\Ionity\.IONITY-LAB\lab.ps1 broker` first.
 
 ## Registered projects
 | Project | Repo |

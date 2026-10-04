@@ -1,8 +1,8 @@
 # Moving GateFlame into the 2nd-Router Test Lab
 
 Doc ID: DOC-2026-09-IONITY-LAB-GF · Policy 986 AED · © 2018-2026 Antwerp Designs | Ionity (Pty) Ltd
-For: the **GateFlame Cowork project** (repo `github.com/dennisGIonity/Gate-Flame`, local `E:\Gateflame`).
-Lab repo: `github.com/dennisGIonity/Ionity-2nd-Router-Test-Lab` (local `E:\.IONITY-LAB`).
+For: the **GateFlame Cowork project** (repo `github.com/dennisGIonity/Gate-Flame`, local `E:\.claude\Ionity\Gateflame`).
+Lab repo: `github.com/dennisGIonity/Ionity-2nd-Router-Test-Lab` (local `E:\.claude\Ionity\.IONITY-LAB`).
 
 ## 1. Where GateFlame is today
 
@@ -10,8 +10,8 @@ Lab repo: `github.com/dennisGIonity/Ionity-2nd-Router-Test-Lab` (local `E:\.IONI
 |---|---|
 | Hardware | Raspberry Pi 5, hostname `raspberrypi`, user `wabapi` |
 | Screen | ASUS monitor on HDMI (kiosk: `gateflame-kiosk`) |
-| Source code | `E:\Gateflame` → `git@github.com:dennisGIonity/Gate-Flame.git` |
-| SSH key | `~/.ssh/id_ed25519` (passphrase-protected), loaded with `E:\Gateflame\tools\load-key.cmd`, agent socket `C:\Users\DGMic\.ssh\agent.sock`, verify host with `HostKeyAlias=raspberrypi` |
+| Source code | `E:\.claude\Ionity\Gateflame` → `git@github.com:dennisGIonity/Gate-Flame.git` |
+| SSH key | `~/.ssh/id_ed25519` (passphrase-protected), loaded with `E:\.claude\Ionity\Gateflame\tools\load-key.cmd`, agent socket `C:\Users\DGMic\.ssh\agent.sock`, verify host with `HostKeyAlias=raspberrypi` |
 | Keystore backup | `E:\Gateflame-KeystoreBackup` (keep offline, never commit) |
 | Pi WiFi `wlan0` | MAC `88:a2:9e:27:a1:8f`, was on the **household** WiFi at `192.168.0.11` |
 | Pi Ethernet `eth0` | MAC `88:a2:9e:27:a1:8d`, on the **H3C lab** at `192.168.124.3` |
@@ -39,21 +39,21 @@ lab's DHCP server unless you decide otherwise.
 
 | # | Step | Where / how |
 |---|---|---|
-| 1 | **Resume GateFlame** so it runs as before | Double-click `E:\.IONITY-LAB\RESUME-GATEFLAME.cmd`, type your SSH passphrase + Pi sudo password. Check: status shows `STATE: running (not paused)` |
+| 1 | **Resume GateFlame** so it runs as before | Double-click `E:\.claude\Ionity\.IONITY-LAB\RESUME-GATEFLAME.cmd`, type your SSH passphrase + Pi sudo password. Check: status shows `STATE: running (not paused)` |
 | 2 | Pi on the lab by **cable**: `eth0` → an H3C **LAN** port | physical |
 | 3 | Reserve `192.168.124.3` for MAC `88:a2:9e:27:a1:8d` | H3C admin `http://192.168.124.1` → DHCP reservation |
 | 4 | **Take the Pi off the household WiFi** (this is what kept GateFlame visible to the house) | On the Pi: `nmcli -f NAME,DEVICE con show` then `sudo nmcli con modify "<household SSID profile>" connection.autoconnect no` and `sudo nmcli con down "<profile>"`. Optional lab WiFi instead: `sudo nmcli dev wifi connect IONITY-LAB` (5 GHz) |
-| 5 | Point GateFlame's own config at lab addresses | In `E:\Gateflame`: replace any `192.168.0.x` / `192.168.2.x` host refs with `192.168.124.3` (Pi) and `192.168.124.4` (laptop / fleet server). Keep Pi-hole bound to `eth0` / `192.168.124.0/24`; Pi-hole DHCP **off** |
+| 5 | Point GateFlame's own config at lab addresses | In `E:\.claude\Ionity\Gateflame`: replace any `192.168.0.x` / `192.168.2.x` host refs with `192.168.124.3` (Pi) and `192.168.124.4` (laptop / fleet server). Keep Pi-hole bound to `eth0` / `192.168.124.0/24`; Pi-hole DHCP **off** |
 | 6 | Deploy + start in the GateFlame project | Its normal deploy (`GATEFLAME-push.cmd` / `release/`), then on the Pi `sudo systemctl start 'gateflame*'` and `docker start gateflame-pihole gateflame-unbound` |
 | 7 | Verify from the laptop | `ssh -o HostKeyAlias=raspberrypi wabapi@192.168.124.3`, `curl http://192.168.124.3:8080/`, and from the household side `Resolve-DnsName google.com -Server 192.168.0.1` still answers (the house is untouched) |
-| 8 | **Register GateFlame in the lab** | Add to `E:\.IONITY-LAB\lab.json` → `projects` (entry below), then `LAB-STATUS.cmd` |
+| 8 | **Register GateFlame in the lab** | Add to `E:\.claude\Ionity\.IONITY-LAB\lab.json` → `projects` (entry below), then `LAB-STATUS.cmd` |
 
 ### lab.json entry for GateFlame
 ```json
 {
   "name": "GateFlame",
   "repo": "https://github.com/dennisGIonity/Gate-Flame",
-  "path": "E:\\Gateflame",
+  "path": "E:\\.claude\\Ionity\\Gateflame",
   "health_url": "http://192.168.124.3:8080/",
   "note": "Runs on the Pi 5 (192.168.124.3). Started on the Pi by systemd, not by lab.ps1."
 }
@@ -68,7 +68,7 @@ the GateFlame kiosk.
 
 ## 5. Paste this into the GateFlame Cowork project
 > GateFlame is moving onto the Ionity 2nd-Router Test Lab (H3C Magic, 192.168.124.0/24), fully off the
-> household TP-Link network. Read `E:\.IONITY-LAB\docs\GATEFLAME-MOVE.md` and `E:\.IONITY-LAB\lab.json`.
+> household TP-Link network. Read `E:\.claude\Ionity\.IONITY-LAB\docs\GATEFLAME-MOVE.md` and `E:\.claude\Ionity\.IONITY-LAB\lab.json`.
 > The Pi 5 is `wabapi@192.168.124.3` (eth0, reserved on the H3C); the laptop/fleet server is 192.168.124.4.
 > GateFlame was paused on 2026-09-22 and has been resumed. Do steps 4-8: take the Pi off household WiFi,
 > repoint GateFlame's config to lab addresses (Pi-hole bound to eth0, DHCP off), deploy, start, verify,

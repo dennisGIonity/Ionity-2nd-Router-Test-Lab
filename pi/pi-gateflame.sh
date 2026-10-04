@@ -46,7 +46,7 @@ case "$ACTION" in
       "sudo bash -c 'bash ~/gateflame-pause.sh; echo; bash ~/lab-display-setup.sh' 2>&1 | tee ~/ionity-lab-setup.log"
     mkdir -p "$HERE/../data"
     scp "${SSH_OPTS[@]}" -q "wabapi@$HOST:~/ionity-lab-setup.log" "$HERE/../data/pi-lab-setup.log" \
-      && echo "log copied to E:\\.IONITY-LAB\\data\\pi-lab-setup.log"
+      && echo "log copied to E:\\.claude\\Ionity\\.IONITY-LAB\\data\\pi-lab-setup.log"
     echo; status ;;
   dry-run|pause|resume)
     scp "${SSH_OPTS[@]}" -q "$HERE/gateflame-pause.sh" "$HERE/gateflame-resume.sh" "wabapi@$HOST:~/" || exit 1

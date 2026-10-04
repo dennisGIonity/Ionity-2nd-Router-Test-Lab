@@ -2,7 +2,7 @@
 # AEDI - IONITY GLOBAL | Lab board identification for the Arduino IDE
 # Added 2026-09-22 by the Ionity Lab bench setup. Delete this file to undo.
 # NOTE: lives inside the core folder, so a core upgrade removes it -
-#       a copy is kept at E:\.IONITY-LAB\arduino\esp32.boards.local.txt
+#       a copy is kept at E:\.claude\Ionity\.IONITY-LAB\arduino\esp32.boards.local.txt
 # ---------------------------------------------------------------------------
 # Why: the IDE names a port by matching its USB VID/PID against boards.txt.
 #  * CH340 (1A86:7523) is a generic USB-serial chip with no identity at all,
